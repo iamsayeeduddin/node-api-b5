@@ -1,6 +1,6 @@
 const get = (req, res) => {
   res.status(200);
-  res.send("Hello Express JS");
+  res.send("Hello Nodemon!");
 };
 
 const health = (req, res) => {
