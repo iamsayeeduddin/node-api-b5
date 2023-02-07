@@ -32,6 +32,10 @@ const books = [
   },
 ];
 class BookCtrl {
+  // constructor() {
+  //   this.create = this.create.bind(this);
+  // }
+
   get(req, res) {
     res.status(200);
     res.json(books);
@@ -60,13 +64,22 @@ class BookCtrl {
     }
   }
 
-  create(req, res) {
-    const payload = req.body;
-    books.push(payload);
-
-    res.status(201);
-    res.send();
+  isPayloadValid(payload) {
+    return payload.id && payload.name && payload.price;
   }
+
+  create = (req, res) => {
+    const payload = req.body;
+
+    if (this.isPayloadValid(payload)) {
+      books.push(payload);
+      res.status(201);
+      res.send();
+    } else {
+      res.status(400);
+      res.send();
+    }
+  };
 }
 
 module.exports = new BookCtrl();
