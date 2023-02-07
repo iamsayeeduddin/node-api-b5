@@ -48,8 +48,24 @@ class BookCtrl {
         book = books[i];
       }
     }
-    res.status(200);
-    res.json(book);
+
+    // Error Handling
+
+    if (book) {
+      res.status(200);
+      res.json(book);
+    } else {
+      res.status(404);
+      res.send("Not Found");
+    }
+  }
+
+  create(req, res) {
+    const payload = req.body;
+    books.push(payload);
+
+    res.status(201);
+    res.send();
   }
 }
 
