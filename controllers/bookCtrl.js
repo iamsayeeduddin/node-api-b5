@@ -13,16 +13,19 @@ const books = [
     id: 1,
     name: "Code Optimization",
     price: 100,
+    inStock: false,
   },
   {
     id: 2,
     name: "Code Refactoring",
     price: 80,
+    inStock: true,
   },
   {
     id: 3,
     name: "CSS Flexbox",
     price: 50,
+    inStock: false,
   },
   {
     id: 4,
@@ -36,7 +39,7 @@ class BookCtrl {
   //   this.create = this.create.bind(this);
   // }
 
-  get(req, res) {
+  getAll(req, res) {
     res.status(200);
     res.json(books);
   }
@@ -79,6 +82,51 @@ class BookCtrl {
       res.status(400);
       res.send();
     }
+  };
+
+  delete = (req, res) => {
+    const id = +req.params.id;
+    for (var i = 0; i < books.length; i++) {
+      if (books[i].id === id) {
+        books.splice(i, 1);
+        break;
+      }
+    }
+    res.status(204);
+    res.send();
+  };
+
+  update = (req, res) => {
+    const id = +req.params.id;
+    const payload = req.body;
+
+    for (var i = 0; i < books.length; i++) {
+      if (books[i].id === id) {
+        books[i].name = payload.name;
+        books[i].price = payload.price;
+        books[i].inStock = payload.inStock;
+      }
+    }
+
+    res.status(204);
+    res.send("Updated");
+  };
+
+  partialUpdate = (req, res) => {
+    const id = +req.params.id;
+    const payload = req.body;
+
+    const book = books.find(function (elem) {
+      return elem.id === id;
+    });
+
+    if (book) {
+      for (let key in payload) {
+        book[key] = payload[key];
+      }
+    }
+
+    res.status(204).send("Updated Successfully!");
   };
 }
 

@@ -31,3 +31,14 @@ app.use("/books", bookRoute);
 // 30 Mins
 // 4. Layered System
 // 5. Client Server
+// MongoDB - Document Based Databased
+// Relational DBs - Non relational dbs
+// id name email
+// 1 Sayeed email.com
+//
+// id marks subjecy
+// 1    20  enGLISH
+
+// Databases - Collections -
+// JSON Document
+// {id: 1, "fullName": "Sayeed", marks: [{subject: "maths", marks: 90}, {subject: "maths", marks: 90}] };
